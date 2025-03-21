@@ -6,12 +6,14 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import com.sathya.mvcproject.entity.Product;
 import com.sathya.mvcproject.productmodel.ProductModel;
 import com.sathya.mvcproject.repository.ProductRepository;
 import com.sathya.mvcproject.service.ProductService;
 
+import jakarta.validation.Valid;
 import lombok.With;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +49,10 @@ public class ProductController {
 	  }
 	 
       @PostMapping("/SaveProduct")
-      public String savepProductData(@ModelAttribute ProductModel productModel) {
+      public String savepProductData(@Valid @ModelAttribute("product") ProductModel productModel,BindingResult bindingResult) {
+    	  if(bindingResult.hasErrors()) {
+    		return "Productform"; 
+    	  }
           productService.saveProduct(productModel);
           return "Success";
       }
@@ -87,6 +92,12 @@ public class ProductController {
     	  model.addAttribute("ProductModel",productModel);
           return "editProduct";
       }
+      
+      @GetMapping("/UpdateProduct/{id}")
+      public String getMethodName(@RequestParam String param) {
+          return new String();
+      }
+      
       
       
       
