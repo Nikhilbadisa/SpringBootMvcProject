@@ -98,6 +98,9 @@
             <label>Price:</label>
             <input type="number" step="0.01" th:field="*{price}" required />
 
+            <label>Made In:</label>
+            <input type="text" th:field="*{madein}" required />
+
             <button type="submit">Save Product</button>
             <a th:href="@{/ViewProducts}">View Details</a>
         </form>

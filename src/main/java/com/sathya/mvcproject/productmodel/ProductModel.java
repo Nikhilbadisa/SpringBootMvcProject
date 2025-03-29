@@ -12,8 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductModel {
+	private Long id;
+
 	@NotBlank(message = "Name cannot be empty")
     @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
+	
 	private String name;
     private int quantity;
     private double price;

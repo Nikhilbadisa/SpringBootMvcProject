@@ -44,7 +44,8 @@ public class ProductController {
 	  public String getMessage(Model model) 
 	  {
 	  Product product = new Product(); 
-	  product.setPrice(100); model.addAttribute("product",product);  
+	  product.setMadein("India"); 
+	  model.addAttribute("product",product);  
 	  return "Productform"; 
 	  }
 	 
@@ -88,15 +89,17 @@ public class ProductController {
       
       @GetMapping("/editProduct/{id}")
       public String geteditProductById(@PathVariable("id") Long id,Model model) {
-    	  ProductModel productModel=productService.geteditProductById(id);
+    	  ProductModel productModel=productService.getEditProductById(id);
     	  model.addAttribute("ProductModel",productModel);
           return "editProduct";
       }
       
-      @GetMapping("/UpdateProduct/{id}")
-      public String getMethodName(@RequestParam String param) {
-          return new String();
+      @PostMapping("/updateProduct/{id}")
+      public String updateProductById(@PathVariable("id") Long id, @ModelAttribute("ProductModel") ProductModel productModel) {
+          productService.updateProductById(id, productModel);
+          return "redirect:/ViewProducts";
       }
+
       
       
       
